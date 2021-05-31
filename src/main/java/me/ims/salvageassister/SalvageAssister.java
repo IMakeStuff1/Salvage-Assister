@@ -52,8 +52,6 @@ public class SalvageAssister {
         // Initialize managers
         eventManager = new EventManager();
 
-        
-
         // Register events
         MinecraftForge.EVENT_BUS.register(eventManager);
     }
