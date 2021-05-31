@@ -15,6 +15,7 @@ public class Assister {
     // TODO Add more salvageables
     private static String[] salvageables = {
             "Zombie Soldier Helm", "Zombie Soldier Chest", "Zombie Soldier Leg", "Zombie Soldier Boots",
+            "Skeleton Soldier Helm", "Skeleton Soldier Chest", "Skeleton Soldier Leg", "Skeleton Soldier Boots",
             "Zombie Soldier Cutlass", "Dreadlord Sword"
     };
 
