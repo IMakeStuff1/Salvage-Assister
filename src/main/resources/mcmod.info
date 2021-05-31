@@ -3,7 +3,7 @@
   "modid": "salvageassister",
   "name": "Salvage Assister",
   "description": "Helps you salvage items in dungeons more efficiently.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "mcversion": "1.8.9",
   "url": "https://github.com/IMakeStuff1/Salvage-Assister",
   "updateUrl": "https://github.com/IMakeStuff1/Salvage-Assister",

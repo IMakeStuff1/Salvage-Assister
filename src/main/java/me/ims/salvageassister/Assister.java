@@ -1,5 +1,6 @@
 package me.ims.salvageassister;
 
+import me.ims.salvageassister.utils.ReflectionUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiChest;
@@ -33,7 +34,7 @@ public class Assister {
                 for(String name : salvageables) {
                     if (slot.getStack().getDisplayName().contains(name)) {
                         // lowerChestInventory = field_147015_w
-                        int guiTop = (event.gui.height - ((222 - 108) + (((IInventory)FieldUtils.readDeclaredField(event.gui, "field_147015_w", true)).getSizeInventory() / 9) * 18)) / 2;
+                        int guiTop = (event.gui.height - ((222 - 108) + (((IInventory)ReflectionUtils.getPrivateValue(GuiChest.class, event.gui, "lowerChestInventory", "field_147015_w")).getSizeInventory() / 9) * 18)) / 2;
                         //FieldUtils.writeField(event.gui, "zLevel", 300F, true);
                         //((RenderItem)FieldUtils.readField(event.gui, "itemRender", true)).zLevel = 300F;
                         //SalvageAssister.logger.info(FieldUtils.readField(event.gui, "zLevel", true));
@@ -54,7 +55,7 @@ public class Assister {
         if(!(event.gui instanceof GuiChest)) return;
         try {
             // lowerChestInventory = field_147015_w
-            String chestName = ((IInventory)FieldUtils.readDeclaredField(event.gui, "field_147015_w", true)).getDisplayName().getUnformattedText();
+            String chestName = ((IInventory)ReflectionUtils.getPrivateValue(GuiChest.class, event.gui, "lowerChestInventory", "field_147015_w")).getDisplayName().getUnformattedText();
 
             if(!chestName.equals("Salvage Dungeon Item")) return;
             int i = Mouse.getEventX() * event.gui.width / mc.displayWidth;
@@ -83,13 +84,13 @@ public class Assister {
         }
     }
 
-    private static Slot getSlotAtPosition(GuiChest guiContainer, int x, int y) throws IllegalAccessException {
-        for (int i = 0; i < guiContainer.inventorySlots.inventorySlots.size(); ++i)
+    private static Slot getSlotAtPosition(GuiChest guiChest, int x, int y) throws IllegalAccessException {
+        for (int i = 0; i < guiChest.inventorySlots.inventorySlots.size(); ++i)
         {
-            Slot slot = guiContainer.inventorySlots.inventorySlots.get(i);
+            Slot slot = guiChest.inventorySlots.inventorySlots.get(i);
 
             // lowerChestInventory = field_147015_w
-            if (isMouseOverSlot(slot, x, y, (guiContainer.width - 176) / 2, (guiContainer.height - ((222 - 108) + (((IInventory)FieldUtils.readDeclaredField(guiContainer, "field_147015_w", true)).getSizeInventory() / 9) * 18)) / 2))
+            if (isMouseOverSlot(slot, x, y, (guiChest.width - 176) / 2, (guiChest.height - ((222 - 108) + (((IInventory)ReflectionUtils.getPrivateValue(GuiChest.class, guiChest, "lowerChestInventory", "field_147015_w")).getSizeInventory() / 9) * 18)) / 2))
             {
                 return slot;
             }
